@@ -9,9 +9,11 @@ public class StressCrudMongoMariaPostgresApplication {
 
     public static void main(String[] args) {
         // Cargar variables desde .env
-        Dotenv dotenv = Dotenv.load();
+        Dotenv dotenv = Dotenv.configure()
+                .ignoreIfMissing() // Ignorar si el archivo .env no está presente
+                .load();
 
-        // Establecer solo las propiedades necesarias desde .env
+        // Establecer las propiedades necesarias desde .env
         System.setProperty("MYSQL_URL", dotenv.get("MYSQL_URL", ""));
         System.setProperty("MYSQL_USERNAME", dotenv.get("MYSQL_USERNAME", ""));
         System.setProperty("MYSQL_PASSWORD", dotenv.get("MYSQL_PASSWORD", ""));
@@ -22,6 +24,7 @@ public class StressCrudMongoMariaPostgresApplication {
 
         System.setProperty("MONGODB_URI", dotenv.get("MONGODB_URI", ""));
 
+        // Iniciar la aplicación Spring Boot
         SpringApplication.run(StressCrudMongoMariaPostgresApplication.class, args);
     }
 }
