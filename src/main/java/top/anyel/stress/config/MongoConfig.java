@@ -19,6 +19,6 @@ public class MongoConfig {
 
     @Bean
     public MongoTemplate mongoTemplate() {
-        return new MongoTemplate(MongoClients.create(mongoUri), "socialmedia");
+        return new MongoTemplate(MongoClients.create(mongoUri), "anyel");
     }
 }
