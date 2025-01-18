@@ -1,4 +1,4 @@
-package top.anyel.stress.controller;
+package top.anyel.stress.mongo.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
