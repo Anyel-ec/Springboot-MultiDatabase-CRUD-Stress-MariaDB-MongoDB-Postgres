@@ -1,9 +1,9 @@
-package top.anyel.stress.mongo.services;
+package top.anyel.stress.mysql.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import top.anyel.stress.mongo.models.SalesOrderMongo;
-import top.anyel.stress.mongo.repositories.SalesOrderRepository;
+import top.anyel.stress.mysql.model.SalesOrderMariaDb;
+import top.anyel.stress.mysql.repositories.SalesOrderMariaDbRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,31 +14,30 @@ import java.util.Optional;
  * Creation date: 18/01/2025
  */
 @Service
-public class SalesOrderService {
-
+public class SalesOrderMariaDbService {
     @Autowired
-    private SalesOrderRepository orderRepository;
+    private SalesOrderMariaDbRepository orderRepository;
 
-    public List<SalesOrderMongo> getAllOrders() {
+    public List<SalesOrderMariaDb> getAllOrders() {
         return orderRepository.findAll();
     }
 
-    public Optional<SalesOrderMongo> getOrderById(String id) {
+    public Optional<SalesOrderMariaDb> getOrderById(Integer id) {
         return orderRepository.findById(id);
     }
 
-    public SalesOrderMongo createOrder(SalesOrderMongo order) {
+    public SalesOrderMariaDb createOrder(SalesOrderMariaDb order) {
         return orderRepository.save(order);
     }
 
-    public SalesOrderMongo updateOrder(String id, SalesOrderMongo updatedOrder) {
+    public SalesOrderMariaDb updateOrder(Integer id, SalesOrderMariaDb updatedOrder) {
         return orderRepository.findById(id).map(order -> {
-            updatedOrder.setId(id);
+            updatedOrder.setOrderId(id);
             return orderRepository.save(updatedOrder);
         }).orElseThrow(() -> new RuntimeException("Order not found"));
     }
 
-    public void deleteOrder(String id) {
+    public void deleteOrder(Integer id) {
         orderRepository.deleteById(id);
     }
 }

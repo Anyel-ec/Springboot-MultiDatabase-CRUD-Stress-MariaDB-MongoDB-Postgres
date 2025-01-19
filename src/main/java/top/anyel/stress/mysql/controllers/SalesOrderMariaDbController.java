@@ -1,10 +1,10 @@
-package top.anyel.stress.mongo.controller;
+package top.anyel.stress.mysql.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import top.anyel.stress.mongo.models.SalesOrderMongo;
-import top.anyel.stress.mongo.services.SalesOrderService;
+import top.anyel.stress.mysql.model.SalesOrderMariaDb;
+import top.anyel.stress.mysql.services.SalesOrderMariaDbService;
 
 import java.util.List;
 
@@ -14,31 +14,30 @@ import java.util.List;
  * Creation date: 18/01/2025
  */
 @RestController
-@RequestMapping("/api/v1/mongodb/orders")
-public class SalesOrderController {
-
+@RequestMapping("/api/v1/mariadb/orders")
+public class SalesOrderMariaDbController {
     @Autowired
-    private SalesOrderService orderService;
+    private SalesOrderMariaDbService orderService;
 
     @GetMapping
-    public List<SalesOrderMongo> getAllOrders() {
+    public List<SalesOrderMariaDb> getAllOrders() {
         return orderService.getAllOrders();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SalesOrderMongo> getOrderById(@PathVariable String id) {
+    public ResponseEntity<SalesOrderMariaDb> getOrderById(@PathVariable Integer id) {
         return orderService.getOrderById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public SalesOrderMongo createOrder(@RequestBody SalesOrderMongo order) {
+    public SalesOrderMariaDb createOrder(@RequestBody SalesOrderMariaDb order) {
         return orderService.createOrder(order);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<SalesOrderMongo> updateOrder(@PathVariable String id, @RequestBody SalesOrderMongo order) {
+    public ResponseEntity<SalesOrderMariaDb> updateOrder(@PathVariable Integer id, @RequestBody SalesOrderMariaDb order) {
         try {
             return ResponseEntity.ok(orderService.updateOrder(id, order));
         } catch (RuntimeException e) {
@@ -47,7 +46,7 @@ public class SalesOrderController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteOrder(@PathVariable String id) {
+    public ResponseEntity<Void> deleteOrder(@PathVariable Integer id) {
         orderService.deleteOrder(id);
         return ResponseEntity.noContent().build();
     }
