@@ -17,7 +17,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 import java.util.HashMap;
-
+/*
+ * Author: Anyel EC
+ * Github: https://github.com/Anyel-ec
+ * Creation date: 08/01/2025
+ */
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(

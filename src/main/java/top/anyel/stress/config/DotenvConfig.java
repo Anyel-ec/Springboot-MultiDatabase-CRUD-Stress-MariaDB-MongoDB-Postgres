@@ -1,14 +1,14 @@
 package top.anyel.stress.config;
 
+
+import io.github.cdimascio.dotenv.Dotenv;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 /*
  * Author: Anyel EC
  * Github: https://github.com/Anyel-ec
  * Creation date: 08/01/2025
  */
-import io.github.cdimascio.dotenv.Dotenv;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
 @Configuration
 public class DotenvConfig {
 

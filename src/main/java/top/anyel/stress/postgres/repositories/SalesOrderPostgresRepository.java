@@ -1,8 +1,8 @@
-package top.anyel.stress.mysql.repositories;
+package top.anyel.stress.postgres.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import top.anyel.stress.mysql.model.SalesOrderMariaDb;
+import top.anyel.stress.postgres.model.SalesOrderPostgres;
 
 /*
  * Author: Anyel EC
@@ -10,7 +10,7 @@ import top.anyel.stress.mysql.model.SalesOrderMariaDb;
  * Creation date: 18/01/2025
  */
 @Repository
-public interface SalesOrderMariaDbRepository extends JpaRepository<SalesOrderMariaDb, Integer> {
+public interface SalesOrderPostgresRepository extends JpaRepository<SalesOrderPostgres, Integer> {
 
 
 }
