@@ -1,6 +1,6 @@
 DROP DATABASE   /*!32312 IF EXISTS*/ NorthwindCore;
 
-CREATE DATABASE NorthwindCore  CHAR SET utf8 COLLATE utf8_bin ; 
+CREATE DATABASE NorthwindCore  CHAR SET utf8 COLLATE utf8_bin ;
 
 
 USE NorthwindCore;

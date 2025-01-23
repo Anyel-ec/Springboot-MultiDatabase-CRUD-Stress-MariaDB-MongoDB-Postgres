@@ -3,21 +3,21 @@
 
 -- Connect to another default database or test database;
 -- Database: testdb;
--- Disconnect existing Northwind if you have created.  
+-- Disconnect existing Northwind if you have created.
 
-DROP DATABASE IF EXISTS Northwind; 
+DROP DATABASE IF EXISTS Northwind;
 
 
 
-CREATE DATABASE Northwind 
-  WITH 
+CREATE DATABASE Northwind
+  WITH
     owner = hho
     encoding = 'UTF8'
-    tablespace = pg_default 
-    lc_collate = 'en_AU.UTF-8' 
+    tablespace = pg_default
+    lc_collate = 'en_AU.UTF-8'
     lc_ctype = 'en_AU.UTF-8'
-    connection LIMIT = -1 
-    template template0; 
+    connection LIMIT = -1
+    template template0;
 
 
 -- Database: Northwind

@@ -10,42 +10,50 @@ import lombok.Data;
  */
 @Data
 @Entity
+@Table(name = "salesorder")
 public class SalesOrderPostgres {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "orderid") // Mapea a "orderid" en la base de datos
     private Integer orderId;
 
-    private Integer custId;
+    @Column(name = "custid") // Mapea a "custid" en la base de datos
+    private String custId;
+
+    @Column(name = "empid") // Cambiado a "empid" para coincidir con la base de datos
     private Integer employeeId;
 
-    @Column(length = 20)
+    @Column(name = "orderdate") // Mapea a "orderdate" en la base de datos
     private String orderDate;
 
-    @Column(length = 20)
+    @Column(name = "requireddate") // Mapea a "requireddate" en la base de datos
     private String requiredDate;
 
-    @Column(length = 20)
+    @Column(name = "shippeddate") // Mapea a "shippeddate" en la base de datos
     private String shippedDate;
 
+    @Column(name = "shipperid") // Mapea a "shipperid" en la base de datos
     private Integer shipperId;
+
+    @Column(name = "freight") // Mapea a "freight" en la base de datos
     private Double freight;
 
-    @Column(length = 40)
+    @Column(name = "shipname", length = 40) // Mapea a "shipname" en la base de datos
     private String shipName;
 
-    @Column(length = 60)
+    @Column(name = "shipaddress", length = 60) // Mapea a "shipaddress" en la base de datos
     private String shipAddress;
 
-    @Column(length = 15)
+    @Column(name = "shipcity", length = 15) // Mapea a "shipcity" en la base de datos
     private String shipCity;
 
-    @Column(length = 15)
+    @Column(name = "shipregion", length = 15) // Mapea a "shipregion" en la base de datos
     private String shipRegion;
 
-    @Column(length = 15)
+    @Column(name = "shippostalcode", length = 15) // Mapea a "shippostalcode" en la base de datos
     private String shipPostalCode;
 
-    @Column(length = 15)
+    @Column(name = "shipcountry", length = 15) // Mapea a "shipcountry" en la base de datos
     private String shipCountry;
 }

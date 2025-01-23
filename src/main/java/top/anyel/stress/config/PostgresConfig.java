@@ -1,9 +1,11 @@
 package top.anyel.stress.config;
 
 import com.zaxxer.hikari.HikariDataSource;
+import jakarta.annotation.PostConstruct;
 import jakarta.persistence.EntityManagerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +17,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
+import java.sql.Connection;
 import java.util.HashMap;
 
 /*
@@ -22,7 +25,6 @@ import java.util.HashMap;
  * Github: https://github.com/Anyel-ec
  * Creation date: 08/01/2025
  */
-
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(
@@ -34,9 +36,13 @@ public class PostgresConfig {
 
     @Bean(name = "postgresDataSource")
     @Primary
-    @ConfigurationProperties(prefix = "spring.datasource.postgres")
     public DataSource postgresDataSource() {
-        return new HikariDataSource();
+        HikariDataSource dataSource = new HikariDataSource();
+        dataSource.setJdbcUrl("jdbc:postgresql://localhost:5444/northwind");
+        dataSource.setUsername("postgres");
+        dataSource.setPassword("anyel");
+        dataSource.setDriverClassName("org.postgresql.Driver");
+        return dataSource;
     }
 
     @Bean(name = "postgresEntityManagerFactoryBuilder")
@@ -62,5 +68,17 @@ public class PostgresConfig {
     public JpaTransactionManager postgresTransactionManager(
             @Qualifier("postgresEntityManagerFactory") EntityManagerFactory entityManagerFactory) {
         return new JpaTransactionManager(entityManagerFactory);
+    }
+
+    // Método para probar conexión fuera del ciclo de creación del contexto
+    public void testConnection() {
+        try {
+            DataSource dataSource = postgresDataSource();
+            Connection connection = dataSource.getConnection();
+            System.out.println("PostgreSQL Connection successful: " + connection.getMetaData().getURL());
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
