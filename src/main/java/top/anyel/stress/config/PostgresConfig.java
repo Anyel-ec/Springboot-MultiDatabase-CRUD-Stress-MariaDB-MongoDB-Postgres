@@ -70,7 +70,6 @@ public class PostgresConfig {
         return new JpaTransactionManager(entityManagerFactory);
     }
 
-    // Método para probar conexión fuera del ciclo de creación del contexto
     public void testConnection() {
         try {
             DataSource dataSource = postgresDataSource();
