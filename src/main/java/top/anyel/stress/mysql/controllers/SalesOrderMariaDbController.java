@@ -1,8 +1,10 @@
 package top.anyel.stress.mysql.controllers;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import top.anyel.stress.dto.JsonResponseDto;
 import top.anyel.stress.mysql.model.SalesOrderMariaDb;
 import top.anyel.stress.mysql.services.SalesOrderMariaDbService;
 
@@ -13,11 +15,24 @@ import java.util.List;
  * Github: https://github.com/Anyel-ec
  * Creation date: 18/01/2025
  */
+@Slf4j
 @RestController
 @RequestMapping("/api/v1/mariadb/orders")
 public class SalesOrderMariaDbController {
     @Autowired
     private SalesOrderMariaDbService orderService;
+
+    @PostMapping("/execute")
+    public JsonResponseDto executeSQLFile() {
+        try {
+            orderService.executeSQLFromFile("mysql/northwind.sql");
+            return new JsonResponseDto(true, 200, "Archivo SQL ejecutado con éxito.", null);
+        } catch (Exception e) {
+            log.error("Error al ejecutar el archivo SQL: " + e.getMessage());
+            log.error(String.valueOf(e));
+            return new JsonResponseDto(false, 500, "Error al ejecutar el archivo SQL: " + e.getMessage(), null);
+        }
+    }
 
     @GetMapping
     public List<SalesOrderMariaDb> getAllOrders() {
