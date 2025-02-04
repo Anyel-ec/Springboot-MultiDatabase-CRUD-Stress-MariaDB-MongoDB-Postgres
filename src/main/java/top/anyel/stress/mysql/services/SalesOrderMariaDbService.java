@@ -28,18 +28,26 @@ public class SalesOrderMariaDbService {
     @Autowired
     private SalesOrderMariaDbRepository orderRepository;
 
+    // Método para obtener todas las órdenes dentro de una transacción
+    @Transactional("mysqlTransactionManager")
     public List<SalesOrderMariaDb> getAllOrders() {
         return orderRepository.findAll();
     }
 
+    // Método para obtener una orden por ID
+    @Transactional("mysqlTransactionManager")
     public Optional<SalesOrderMariaDb> getOrderById(Integer id) {
         return orderRepository.findById(id);
     }
 
+    // Método para crear una nueva orden
+    @Transactional("mysqlTransactionManager")
     public SalesOrderMariaDb createOrder(SalesOrderMariaDb order) {
         return orderRepository.save(order);
     }
 
+    // Método para actualizar una orden existente; si no se encuentra, lanza excepción para forzar rollback
+    @Transactional("mysqlTransactionManager")
     public SalesOrderMariaDb updateOrder(Integer id, SalesOrderMariaDb updatedOrder) {
         return orderRepository.findById(id).map(order -> {
             updatedOrder.setOrderId(id);
@@ -47,6 +55,8 @@ public class SalesOrderMariaDbService {
         }).orElseThrow(() -> new RuntimeException("Order not found"));
     }
 
+    // Método para eliminar una orden por ID
+    @Transactional("mysqlTransactionManager")
     public void deleteOrder(Integer id) {
         orderRepository.deleteById(id);
     }

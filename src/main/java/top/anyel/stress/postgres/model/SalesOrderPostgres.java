@@ -1,13 +1,10 @@
 package top.anyel.stress.postgres.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Data;
+import java.time.LocalDateTime;
 
-/*
- * Author: Anyel EC
- * Github: https://github.com/Anyel-ec
- * Creation date: 18/01/2025
- */
 @Data
 @Entity
 @Table(name = "salesorder")
@@ -24,14 +21,18 @@ public class SalesOrderPostgres {
     @Column(name = "empid")
     private Integer employeeId;
 
+    // Con @JsonFormat le indicamos a Jackson el formato esperado en el JSON.
     @Column(name = "orderdate")
-    private String orderDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime orderDate;
 
     @Column(name = "requireddate")
-    private String requiredDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime requiredDate;
 
     @Column(name = "shippeddate")
-    private String shippedDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime shippedDate;
 
     @Column(name = "shipperid")
     private Integer shipperId;
