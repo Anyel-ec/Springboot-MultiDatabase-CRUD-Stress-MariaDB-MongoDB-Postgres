@@ -43,7 +43,6 @@ public class SalesOrderPostgresService {
         }).orElseThrow(() -> new RuntimeException("Order not found"));
     }
 
-    @Transactional("postgresTransactionManager")
     public void deleteOrder(Integer id) {
         orderRepository.deleteById(id);
     }

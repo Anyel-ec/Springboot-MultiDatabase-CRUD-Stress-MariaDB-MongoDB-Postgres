@@ -1,6 +1,5 @@
 
 -- Database: Northwind
-
 DROP TABLE IF EXISTS Category;
 
 CREATE TABLE Category 

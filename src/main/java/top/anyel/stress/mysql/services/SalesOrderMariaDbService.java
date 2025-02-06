@@ -55,8 +55,6 @@ public class SalesOrderMariaDbService {
         }).orElseThrow(() -> new RuntimeException("Order not found"));
     }
 
-    // Método para eliminar una orden por ID
-    @Transactional("mysqlTransactionManager")
     public void deleteOrder(Integer id) {
         orderRepository.deleteById(id);
     }
