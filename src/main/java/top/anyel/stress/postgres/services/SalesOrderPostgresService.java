@@ -20,22 +20,18 @@ public class SalesOrderPostgresService {
     @Autowired
     private SalesOrderPostgresRepository orderRepository;
 
-    @Transactional("postgresTransactionManager")
     public List<SalesOrderPostgres> getAllOrders() {
         return orderRepository.findAll();
     }
 
-    @Transactional("postgresTransactionManager")
     public Optional<SalesOrderPostgres> getOrderById(Integer id) {
         return orderRepository.findById(id);
     }
 
-    @Transactional("postgresTransactionManager")
     public SalesOrderPostgres createOrder(SalesOrderPostgres order) {
         return orderRepository.save(order);
     }
 
-    @Transactional("postgresTransactionManager")
     public SalesOrderPostgres updateOrder(Integer id, SalesOrderPostgres updatedOrder) {
         return orderRepository.findById(id).map(order -> {
             updatedOrder.setOrderId(id);

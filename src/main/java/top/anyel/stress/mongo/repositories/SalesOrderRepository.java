@@ -1,4 +1,5 @@
 package top.anyel.stress.mongo.repositories;
+import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 import top.anyel.stress.mongo.models.SalesOrderMongo;
@@ -9,5 +10,6 @@ import top.anyel.stress.mongo.models.SalesOrderMongo;
  * Creation date: 18/01/2025
  */
 @Repository
-public interface SalesOrderRepository extends MongoRepository<SalesOrderMongo, String> {
+public interface SalesOrderRepository extends MongoRepository<SalesOrderMongo, ObjectId> {
 }
+

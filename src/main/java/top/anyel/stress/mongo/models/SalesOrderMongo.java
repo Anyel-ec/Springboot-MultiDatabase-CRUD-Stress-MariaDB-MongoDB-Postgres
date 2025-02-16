@@ -1,7 +1,8 @@
 package top.anyel.stress.mongo.models;
 
+import jakarta.persistence.Id;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
+import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /*
@@ -13,7 +14,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "salesOrder")
 public class SalesOrderMongo {
     @Id
-    private String id;
+    private ObjectId id;
     private double freight;
     private int entityId;
     private String shipCity;
@@ -30,5 +31,14 @@ public class SalesOrderMongo {
     private String shipAddress;
     private String shipCountry;
     private String shipPostalCode;
+
+    public String getId() {
+        return id != null ? id.toHexString() : null;
+    }
+
+    // 🔹 Setter acepta ObjectId directamente
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
 
 }
